@@ -35,7 +35,7 @@ describe Api::V1::DocumentsController, type: :api do
     context 'when request is valid' do
       let(:file) do
         Rack::Test::UploadedFile.new(
-          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx2.pptx"))
+          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx3.pptx"))
         )
       end
 
