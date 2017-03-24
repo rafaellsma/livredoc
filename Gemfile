@@ -27,10 +27,9 @@ gem 'puma', '~> 3.0'
 
 #Usada para upload de arquivos
 gem 'carrierwave'
-gem 'carrierwave-unoconv'
 
-#Usada para converter arquivos lido pelo libreoffice para pdf
-gem 'docsplit'
+#Usada para converter arquivos lido pelo OpenOffice para pdf
+gem 'carrierwave-unoconv'
 
 #Usada para serializar o model
 gem 'active_model_serializers'

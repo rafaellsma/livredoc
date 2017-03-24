@@ -60,7 +60,7 @@ describe Api::V1::DocumentsController, type: :api do
         expect(document).to_not be nil
         expect(document.document_id).to be valid_params[:document_id]
         expect(document.file).to_not be nil
-        expect(document.pdf).to_not be nil
+        expect(document.file.pdf).to_not be nil
       end
 
       context 'when create document with existing document_id' do

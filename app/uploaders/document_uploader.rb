@@ -1,5 +1,13 @@
 class DocumentUploader < CarrierWave::Uploader::Base
-  after :store, :convert_to_pdf
+  include CarrierWave::UNOConv
+
+  version :pdf do
+    process uno_convert: 'pdf'
+
+    def full_filename(for_file)
+      super(for_file).chomp(File.extname(super(for_file))) + '.pdf'
+    end
+  end
 
   storage :file
 
@@ -8,13 +16,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(ppt pptx)
-  end
-
-  def convert_to_pdf(file)
-    ConversionService.to_pdf(model.file.path)
-    model.pdf = model.file.md5 + '.pdf'
-    model.save
+    %w(ppt pptx pdf)
   end
 
   def md5
@@ -24,5 +26,4 @@ class DocumentUploader < CarrierWave::Uploader::Base
   def filename
     @name ||= "#{md5}#{File.extname(super)}" if super
   end
-
 end
