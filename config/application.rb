@@ -29,6 +29,13 @@ module Livredoc
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    if Rails.env.test?
+      CarrierWave.configure do |config|
+        config.storage = :file
+        config.enable_processing = false
+      end
+    end
+
     config.i18n.default_locale = :pt
   end
 end
