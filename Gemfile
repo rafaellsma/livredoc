@@ -34,6 +34,9 @@ gem 'carrierwave-unoconv'
 #Offload processing or storage/processing to a background task
 gem 'carrierwave_backgrounder'
 
+#Backend queue adapater
+gem 'sidekiq'
+
 #Usada para serializar o model
 gem 'active_model_serializers'
 

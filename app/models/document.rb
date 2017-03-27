@@ -1,6 +1,9 @@
 class Document < ApplicationRecord
   mount_uploader :file, DocumentUploader
 
+  process_in_background :file
+
+
   validates :file, presence: true
   validates :document_id, presence: true, uniqueness: true
 
