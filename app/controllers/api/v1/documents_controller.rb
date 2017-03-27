@@ -10,6 +10,22 @@ module Api::V1
       end
     end
 
+    def show
+      document = nil
+
+      begin
+        document = Document.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        document = nil
+      end
+
+      if document
+        send_file document.file.pdf.path
+      else
+        render json: { 'message': 'Not found' }, status: :not_found
+      end
+    end
+
     private
 
     def document_params
