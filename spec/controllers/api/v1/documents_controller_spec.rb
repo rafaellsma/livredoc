@@ -1,8 +1,7 @@
 require 'rails_helper'
-require 'carrierwave/test/matchers'
 
 describe Api::V1::DocumentsController, type: :api do
-  include CarrierWave::Test::Matchers
+
   context 'POST create' do
 
     context 'when doesnt exist the secret token' do
@@ -164,11 +163,31 @@ describe Api::V1::DocumentsController, type: :api do
         File.open(File.join("#{Rails.root}/spec/files/pptx/pptx4.pptx"))
       end
       before do
-        header "Authorization", "Token openredu1"
-        get 'api/v1/documents/1', id: document
+        header "Authorization", "Token openredu"
+        get "api/v1/documents/#{document.id}"
       end
 
       it 'responds with a 200 status' do
+        expect(last_response.status).to eq 200
+      end
+
+      it 'send file' do
+        expect(last_response.body).to eq IO.binread(document.file.pdf.path)
+      end
+    end
+
+    context 'when request is invalid' do
+      before do
+        header "Authorization", "Token openredu"
+        get "api/v1/documents/10000"
+      end
+
+      it 'responds with a 404 status' do
+        expect(last_response.status).to eq 404
+      end
+
+      it 'responds with a not found message' do
+        expect(json['message']).to eq 'Not found'
       end
     end
   end
