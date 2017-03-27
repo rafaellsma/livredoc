@@ -52,6 +52,7 @@ GEM
       mime-types (>= 1.16)
     carrierwave-unoconv (0.0.1)
       carrierwave
+    carrierwave_backgrounder (0.0.2)
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.0.5)
@@ -155,6 +156,7 @@ DEPENDENCIES
   byebug
   carrierwave
   carrierwave-unoconv
+  carrierwave_backgrounder
   listen (~> 3.0.5)
   pg (~> 0.18)
   puma (~> 3.0)
