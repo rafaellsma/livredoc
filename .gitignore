@@ -18,5 +18,6 @@
 
 .DS_Store
 
-/public/files
-/public/uploads
+/public/files/*
+/public/uploads/*
+.*~
