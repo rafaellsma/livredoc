@@ -1,24 +1,24 @@
-# README
+# LivreDOC
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+O livreDOC é uma API que utiliza a arquitetura REST que converte qualquer extensão aceita pelo LibreOffice/OpenOffice em pdf.
 
 * Ruby version
+  - 2.4.0
 
-* System dependencies
-
-* Configuration
+* Dependências
+  - Rails 5
+  - Postgres
+  - Redis
+  - OpenOffice ou LibreOffice
+  - UNOconv
 
 * Database creation
-
-* Database initialization
+  - rake db:setup
 
 * How to run the test suite
+  - rspec
 
 * Services (job queues, cache servers, search engines, etc.)
+  - Sidekiq
 
 * Deployment instructions
-
-* ...
