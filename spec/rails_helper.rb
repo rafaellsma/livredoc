@@ -56,4 +56,10 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include ApiHelper, type: :api
   config.include Requests::JsonHelpers, type: :api
+
+  config.after(:each) do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
+    end
+  end
 end
