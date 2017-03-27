@@ -1,0 +1,6 @@
+pt:
+  errors:
+    messages:
+      taken: 'já existe no sistema'
+      blank: 'não pode ficar em branco'
+      extension_whitelist_error: 'tipo inválido'
