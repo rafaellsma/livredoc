@@ -1,5 +1,6 @@
 class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::UNOConv
+  include ::CarrierWave::Backgrounder::Delay
 
   version :pdf do
     process uno_convert: 'pdf'
