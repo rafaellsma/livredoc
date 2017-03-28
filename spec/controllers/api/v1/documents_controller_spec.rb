@@ -119,7 +119,7 @@ describe Api::V1::DocumentsController, type: :api do
         it 'shows errors' do
 
           expect(json['file']).to  contain_exactly(
-            I18n.t('errors.messages.extension_whitelist_error'),
+            I18n.t('errors.messages.extension_white_list_error'),
             I18n.t('errors.messages.blank')
           )
         end
@@ -158,13 +158,25 @@ describe Api::V1::DocumentsController, type: :api do
     end
 
     context 'when request is valid' do
-      let!(:document) { Document.create(document_id: 1, file: valid_file) }
       let!(:valid_file) do
-        File.open(File.join("#{Rails.root}/spec/files/pptx/pptx4.pptx"))
+        Rack::Test::UploadedFile.new(
+          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx4.pptx"))
+        )
       end
+
+      let!(:valid_params) do
+        {
+          document_id: 15,
+          file: valid_file
+        }
+      end
+
       before do
         header "Authorization", "Token openredu"
-        get "api/v1/documents/#{document.id}"
+        post 'api/v1/documents', valid_params
+
+        header "Authorization", "Token openredu"
+        get "api/v1/documents/#{Document.first.id}"
       end
 
       it 'responds with a 200 status' do
@@ -172,7 +184,7 @@ describe Api::V1::DocumentsController, type: :api do
       end
 
       it 'send file' do
-        expect(last_response.body).to eq IO.binread(document.file.pdf.path)
+        expect(last_response.body).to eq IO.binread(Document.first.file.pdf.path)
       end
     end
 

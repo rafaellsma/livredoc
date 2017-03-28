@@ -3,4 +3,4 @@ pt:
     messages:
       taken: 'já existe no sistema'
       blank: 'não pode ficar em branco'
-      extension_whitelist_error: 'tipo inválido'
+      extension_white_list_error: 'tipo inválido'
