@@ -10,6 +10,11 @@ on :load do
   set :assets_role, [:app]
 end
 
+
+set :initial_ssh_user, ENV['ssh_user']
+
+set :initial_ssh_password, ENV['ssh_password']
+
 # Use a simple directory tree copy here to make demo easier.
 # You probably want to use your own repository for a real app
 set :scm, :none
