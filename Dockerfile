@@ -1,8 +1,10 @@
 FROM ruby:2.4.0
 
-RUN mkdir /app
+ENV RAILS_ROOT /app
 
-WORKDIR /app
+RUN mkdir $RAILS_ROOT
+
+WORKDIR $RAILS_ROOT
 
 RUN apt-get update
 
@@ -12,9 +14,9 @@ RUN apt-get install -y postgresql-client
 
 RUN apt-get install -y unoconv
 
-COPY Gemfile /app
+COPY Gemfile $RAILS_ROOT
 
-COPY Gemfile.lock /app
+COPY Gemfile.lock $RAILS_ROOT
 
 RUN bundle install
 
