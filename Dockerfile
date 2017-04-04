@@ -22,4 +22,4 @@ COPY . /app
 
 EXPOSE 3000
 
-CMD puma
+CMD puma -C config/puma.rb
