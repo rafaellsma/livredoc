@@ -9,7 +9,7 @@ namespace :rubber do
     # mess with us restarting everything as part of a deploy.
     before "rubber:pre_stop", "rubber:monit:stop"
     before "rubber:pre_restart", "rubber:monit:stop"
-    after "rubber:post_start", "rubber:monit:start"
+#    after "rubber:post_start", "rubber:monit:start"
     after "rubber:post_restart", "rubber:monit:start"
 
     desc "Start monit daemon monitoring"

@@ -30,7 +30,7 @@ namespace :rubber do
     end
     
     before "deploy:stop", "rubber:nginx:stop"
-    after "deploy:start", "rubber:nginx:start"
+#    after "deploy:start", "rubber:nginx:start"
     after "deploy:restart", "rubber:nginx:reload"
     
     desc "Stops the nginx web server"

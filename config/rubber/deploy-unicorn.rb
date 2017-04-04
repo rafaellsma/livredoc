@@ -36,8 +36,8 @@ namespace :rubber do
 
     desc "Display status of the unicorn web server"
     task :status, :roles => :unicorn do
-      rsudo "service unicorn status || true"
-      rsudo "ps -eopid,user,cmd | grep [u]nicorn || true"
+      rsudo "service unicorn status"
+      #rsudo "ps -eopid,user,cmd | grep [u]nicorn || true"
       # rsudo "netstat -tupan | grep unicorn || true"
     end
 

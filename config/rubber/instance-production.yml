@@ -1,0 +1,58 @@
+---
+- !ruby/object:Rubber::Configuration::InstanceItem
+  name: production
+  domain: livredoc.openredu.com
+  roles:
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: app
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: unicorn
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: nginx
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: collectd
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: db
+    options:
+      primary: true
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: postgresql
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: postgresql_master
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: monit
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: redis
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: redis_master
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: web
+    options: {}
+  instance_id: production
+  image_type: 
+  image_id: 
+  security_groups:
+  - default
+  - web
+  zone: 
+  network: 
+  gateway: 
+  external_host: 
+  external_ip: 172.21.6.107
+  internal_host: 
+  internal_ip: 172.21.6.107
+  provider: generic
+  platform: linux
+  root_device_type: 
+- volumes: {}
+  static_ips: {}
+  vpc: {}
