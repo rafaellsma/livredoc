@@ -10,18 +10,43 @@ services:
     depends_on:
       - 'db'
       - 'redis'
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-stage
     expose:
-      - "3000"
+      - "4000"
     volumes:
       - '.:/app'
     env_file:
       - .env
 
+  app_stage:
+    depends_on:
+      - 'db'
+      - 'redis'
+    build: .
+    expose:
+      - "4001"
+    volumes:
+      - '.:/app_stage'
+    env_file:
+      - .env_stage
+
   sidekiq:
     build: .
     volumes:
       - .:/app
+    links:
+      - db
+      - redis
+    command: bundle exec sidekiq -q carrierwave
+    env_file:
+      - .env
+
+  sidekiq_stage:
+    build: .
+    volumes:
+      - .:/app_stage
     links:
       - db
       - redis
@@ -40,6 +65,7 @@ services:
       dockerfile: /config/containers/Dockerfile-nginx
     links:
       - app
+      - app_stage
     ports:
       - "80:80"
 
