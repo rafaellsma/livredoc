@@ -12,7 +12,7 @@ services:
       - 'redis'
     build: .
     expose:
-      - "3000"
+      - "4000"
     volumes:
       - '.:/app'
     env_file:
@@ -33,15 +33,6 @@ services:
     image: redis
     volumes:
       - 'redis:/var/lib/redis/data'
-
-  web:
-    build:
-      context: .
-      dockerfile: /config/containers/Dockerfile-nginx
-    links:
-      - app
-    ports:
-      - "80:80"
 
 volumes:
   postgres:
