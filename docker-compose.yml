@@ -10,9 +10,7 @@ services:
     depends_on:
       - 'db'
       - 'redis'
-    build:
-      context: .
-      dockerfile: Dockerfile-stage
+    build: .
     expose:
       - "4000"
     volumes:
@@ -23,12 +21,14 @@ services:
   app_stage:
     depends_on:
       - 'db'
-      - 'redis'
-    build: .
+      - 'redis_stage'
+    build:
+      context: .
+      dockerfile: Dockerfile-stage
     expose:
       - "4001"
     volumes:
-      - '.:/app_stage'
+      - '.:/app'
     env_file:
       - .env_stage
 
@@ -46,18 +46,23 @@ services:
   sidekiq_stage:
     build: .
     volumes:
-      - .:/app_stage
+      - .:/app
     links:
       - db
-      - redis
+      - redis_stage
     command: bundle exec sidekiq -q carrierwave
     env_file:
-      - .env
+      - .env_stage
 
   redis:
     image: redis
     volumes:
       - 'redis:/var/lib/redis/data'
+
+  redis_stage:
+    image: redis
+    volumes:
+      - 'redis_stage:/var/lib/redis/data_stage'
 
   web:
     build:
@@ -72,3 +77,4 @@ services:
 volumes:
   postgres:
   redis:
+  redis_stage:

@@ -29,6 +29,10 @@ module Livredoc
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    path = File.join( Rails.root, "log/#{ENV['DOMAIN']}.log" )
+    config.log_path = path
+    config.logger = Logger.new(path, 10, 1048576)
+
     config.i18n.default_locale = :pt
   end
 end

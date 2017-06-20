@@ -1,6 +1,6 @@
 FROM ruby:2.4.0
 
-ENV RAILS_ROOT /app_stage
+ENV RAILS_ROOT /app
 
 RUN mkdir $RAILS_ROOT
 
@@ -22,6 +22,6 @@ RUN bundle install
 
 COPY . $RAILS_ROOT
 
-EXPOSE 4001
+EXPOSE 4000
 
 CMD puma -C config/puma.rb
