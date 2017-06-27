@@ -11,8 +11,8 @@ services:
       - 'db'
       - 'redis'
     build: .
-    expose:
-      - "4000"
+    ports:
+      - "4000:4000"
     volumes:
       - '.:/app'
     env_file:
@@ -25,8 +25,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-stage
-    expose:
-      - "4001"
+    ports:
+      - "4001:4001"
     volumes:
       - '.:/app'
     env_file:
@@ -63,16 +63,6 @@ services:
     image: redis
     volumes:
       - 'redis_stage:/var/lib/redis/data_stage'
-
-  web:
-    build:
-      context: .
-      dockerfile: /config/containers/Dockerfile-nginx
-    links:
-      - app
-      - app_stage
-    ports:
-      - "80:80"
 
 volumes:
   postgres:
