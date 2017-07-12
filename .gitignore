@@ -21,3 +21,5 @@
 /public/files/*
 /public/uploads/*
 .*~
+
+dump.rdb
