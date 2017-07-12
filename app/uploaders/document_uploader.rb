@@ -1,5 +1,6 @@
 class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::UNOConv
+  include ::CarrierWave::Backgrounder::Delay
 
   version :pdf do
     process uno_convert: 'pdf'
@@ -15,7 +16,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def extension_whitelist
+  def extension_white_list
     %w(ppt pptx pdf)
   end
 

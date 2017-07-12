@@ -5,6 +5,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'sidekiq/testing'
+Sidekiq::Testing.inline!
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -57,9 +59,13 @@ RSpec.configure do |config|
   config.include ApiHelper, type: :api
   config.include Requests::JsonHelpers, type: :api
 
-  config.after(:each) do
+  config.before(:each) do
+    Sidekiq::Worker.clear_all
+  end
+
+  config.after(:suite) do
     if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
+#      FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
     end
   end
 end
