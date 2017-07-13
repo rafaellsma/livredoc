@@ -36,7 +36,7 @@ describe Api::V1::DocumentsController, type: :api do
     context 'when request is valid' do
       let(:file) do
         Rack::Test::UploadedFile.new(
-          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx4.pptx"))
+          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx2.pptx"))
         )
       end
 
@@ -64,20 +64,6 @@ describe Api::V1::DocumentsController, type: :api do
         expect(document.file.pdf).to_not be nil
       end
 
-      context 'when create document with existing document_id' do
-        before do
-          header "Authorization", "Token openredu"
-          post 'api/v1/documents', valid_params
-        end
-
-        it 'responds with status 422' do
-          expect(last_response.status).to be 422
-        end
-
-        it 'shows errors' do
-          expect(json['document_id']).to  contain_exactly(I18n.t('errors.messages.taken'))
-        end
-      end
     end
 
     context 'when request is not valid' do
@@ -92,7 +78,6 @@ describe Api::V1::DocumentsController, type: :api do
 
       it 'shows errors' do
         expect(json['file']).to  contain_exactly(I18n.t('errors.messages.blank'))
-        expect(json['document_id']).to  contain_exactly(I18n.t('errors.messages.blank'))
       end
 
       context 'when extension file is invalid' do
@@ -160,7 +145,7 @@ describe Api::V1::DocumentsController, type: :api do
     context 'when request is valid' do
       let!(:valid_file) do
         Rack::Test::UploadedFile.new(
-          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx4.pptx"))
+          File.open(File.join("#{Rails.root}/spec/files/pptx/pptx2.pptx"))
         )
       end
 
