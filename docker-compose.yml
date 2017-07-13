@@ -34,15 +34,6 @@ services:
     volumes:
       - 'redis:/var/lib/redis/data'
 
-  web:
-    build:
-      context: .
-      dockerfile: /config/containers/Dockerfile-nginx
-    links:
-      - app
-    ports:
-      - "80:80"
-
 volumes:
   postgres:
   redis:
