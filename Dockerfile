@@ -22,6 +22,6 @@ RUN bundle install
 
 COPY . /app
 
-EXPOSE 3000
+EXPOSE 4000
 
 CMD puma -C config/puma.rb
