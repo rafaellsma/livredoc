@@ -1,15 +1,15 @@
 version: '2'
 
 services:
-  db:
+  livredoc_db:
     image: 'postgres:latest'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
-  app:
+  livredoc:
     depends_on:
-      - 'db'
-      - 'redis'
+      - 'livredoc_db'
+      - 'livredoc_redis'
     build: .
     ports:
       - "4000:4000"
@@ -18,18 +18,18 @@ services:
     env_file:
       - .env
 
-  sidekiq:
+  livredoc_sidekiq:
     build: .
     volumes:
       - .:/app
     links:
-      - db
-      - redis
+      - livredoc_db
+      - livredoc_redis
     command: bundle exec sidekiq -q carrierwave
     env_file:
       - .env
 
-  redis:
+  livredoc_redis:
     image: redis
     volumes:
       - 'redis:/var/lib/redis/data'
